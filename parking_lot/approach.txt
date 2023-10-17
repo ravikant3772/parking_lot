@@ -1,0 +1,53 @@
+This is an CLI app. which can be run by using ruby command
+While creating this app have creted 4 classes
+1. Application
+2. ParkingLot
+3. Car
+4. Ticket
+
+Application class is singleton class to start the application. other 3 classes can be considered as model
+
+ParkingLot
+	field :capacity
+	has_many: cars
+
+Car
+	field :id,
+	field :reg_number
+	field :color
+	has_one: ticket
+
+Ticket
+	field :id
+	field :active
+	belongs_to: car
+
+
+1.I have considered there will be only one ParkingLot, So ParkingLot class is a singleton class, which stores the total car parking capacity. ParkingLot holds the logic for assigning_capacity and assigning slot to car.
+ParkingLot class included ParkingLotHelper which is has logic to check parking lot availabilty and return availabile parking lots
+ParkingLot validates before creating new parking lot, and also checks the availabilty of space to assign new car in ParkingLot
+
+2.The instance of Car class holds the fileds id, reg_number, color, ticket_id.
+The Car class has function to create car and assign the color, reg_number. Also car instance has id which auto generated.
+Ther is a car helper holds the additional logic
+
+3.The Ticket class is holding the ticket number and status. Ticket id is auto generated as prefix 'Tick_'
+
+Above classes are considered as model and it has the query functions like
+- all
+- find_by
+- find
+
+Application class is entry class of the app. It has the start, show_menu methods which displays the menu on screen and accepts the option.
+Application class has methods which invokes the instances of ParkingLot and Car.
+- to generate parking lot
+- to generate car
+- assign car to parking lot
+- run the queries
+
+- There is serializer created to serialized the data for ticket object.
+- To decorate the strings in different color I monkey patched the String class, in string_monkey_patch.
+- Validator helper helps to validate some data as well as user input
+- Display helper helps to display the output.
+
+refer README.md file to start the application.
